@@ -1,0 +1,1557 @@
+/* src/app/components/SupportSection.css */
+
+/* Apply official brand fonts - must be first */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@900&display=swap');
+
+:root {
+  --deep-rose: #c81e5d;
+  --salmon-pink: #e95458;
+  --charcoal: #1e1e1e;
+  --font-primary: 'Poppins', sans-serif;
+  --font-accent: 'Playfair Display', serif;
+}
+
+.support-and-mission-container {
+  background: linear-gradient(135deg, rgba(255, 249, 247, 0.5), rgba(253, 242, 248, 0.5));
+  border: 1px solid #eee;
+  border-radius: var(--border-radius);
+  padding: 48px;
+  margin-top: 60px;
+  box-shadow: var(--shadow-soft);
+}
+
+.main-grid-reformed {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.support-info-reformed .support-header {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.support-info-reformed .support-title {
+  font-size: 32px;
+}
+
+.support-list-reformed {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.support-list-reformed li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: var(--border-radius);
+  border: 1px solid #fde2ec;
+  transition: all 0.3s ease;
+}
+
+.support-list-reformed li:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+  border-color: var(--deep-rose);
+}
+
+.support-list-reformed .list-item-icon {
+  font-size: 24px;
+  background: var(--gradient-primary);
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.support-list-reformed .support-item-content span {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--charcoal);
+}
+
+.support-list-reformed .support-description {
+  font-size: 14px;
+  color: #5a5a5a;
+}
+
+.mission-story-reformed {
+  background: white;
+  padding: 32px;
+  border-radius: var(--border-radius);
+  border: 1px solid #eee;
+}
+
+.mission-story-reformed .mission-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.mission-story-reformed h3 {
+  font-family: var(--font-accent);
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--deep-rose);
+  margin-bottom: 16px;
+}
+
+.mission-story-reformed p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #3a3a3a;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .main-grid-reformed {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+    .support-and-mission-container {
+        padding: 24px;
+    }
+    .support-info-reformed .support-title {
+        font-size: 28px;
+    }
+}
+
+/* Hero Section - Make it shorter */
+.hero {
+  min-height: 70vh; /* Reduced from default */
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Tier Cards Styling with Brand Guidelines */
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  justify-items: center;
+}
+
+/* Responsive grid for mobile and tablet */
+@media (max-width: 1024px) {
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tiers-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem 0;
+  }
+  
+  .tier-card {
+    max-width: 100%;
+    min-height: auto;
+    padding: 1.5rem;
+  }
+  
+  /* What Donors Receive Mobile Responsive */
+  .donor-benefits-section {
+    padding: 1.5rem 0;
+  }
+  
+  .benefits-header {
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .benefits-header h2 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+  
+  .benefits-header p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 0 1rem;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+  
+  .benefit-category {
+    padding: 1.2rem;
+    margin: 0;
+  }
+  
+  .benefit-icon {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .benefit-category h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .benefit-category li {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  
+  /* Donate Section Mobile */
+  .donate-container {
+    padding: 2rem 0;
+    margin: 1rem 0;
+  }
+  
+  .donate-box-placeholder {
+    padding: 1.5rem;
+    margin: 0 1rem;
+    max-width: 100%;
+  }
+  
+  .donate-box-placeholder h4 {
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .donate-box-placeholder p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .donate-btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .tier-header h3 {
+    font-size: 1.5rem;
+  }
+  
+  .tier-price {
+    font-size: 2rem;
+  }
+  
+  .tier-features li {
+    font-size: 0.75rem;
+    padding: 0.25rem 0;
+  }
+  
+  .benefits-toggle-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .tier-impact {
+    padding: 0.4rem;
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+  }
+  
+  .membership-title {
+    font-size: 2.5rem;
+  }
+  
+
+  
+  .membership-subtitle {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .benefit-category {
+    padding: 1.5rem;
+  }
+  
+  .benefits-header h2 {
+    font-size: 2rem;
+  }
+  
+  .benefits-header p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .benefit-icon {
+    font-size: 2.5rem;
+  }
+  
+  .benefit-category h3 {
+    font-size: 1.3rem;
+  }
+  
+  .benefit-category li {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .donor-benefits-section {
+    padding: 1rem 0;
+  }
+  
+  .benefits-header {
+    margin-bottom: 1rem;
+  }
+  
+  .benefits-header h2 {
+    font-size: 1.4rem;
+    padding: 0 0.5rem;
+  }
+  
+  .benefits-header p {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+  
+  .benefits-grid {
+    gap: 0.8rem;
+    padding: 0 0.5rem;
+  }
+  
+  .benefit-category {
+    padding: 0.8rem;
+  }
+  
+  .benefit-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .benefit-category h3 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .benefit-category li {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+  }
+  
+  .donate-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .donate-container {
+    padding: 2rem 0;
+    margin: 1rem 0;
+  }
+  
+  .donate-box-placeholder {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .donate-box-placeholder h4 {
+    font-size: 1.5rem;
+  }
+  
+  .donate-box-placeholder p {
+    font-size: 1rem;
+  }
+}
+
+/* Landscape mobile devices */
+@media (max-width: 768px) and (orientation: landscape) {
+  .donor-benefits-section {
+    padding: 2rem 0;
+  }
+  
+  .benefits-grid {
+    gap: 1.5rem;
+  }
+  
+  .benefit-category {
+    padding: 1.2rem;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .benefit-category {
+    border-width: 0.5px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .tier-card {
+    padding: 1rem;
+  }
+  
+  .tier-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .tier-price {
+    font-size: 1.8rem;
+  }
+  
+  .tier-features {
+    min-height: 150px;
+  }
+  
+  .benefits-toggle-btn {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Extra Small Mobile - What Donors Receive */
+  .donor-benefits-section {
+    padding: 1rem 0;
+  }
+  
+  .benefits-header h2 {
+    font-size: 1.4rem;
+    padding: 0 0.5rem;
+  }
+  
+  .benefits-header p {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+  
+  .benefits-grid {
+    gap: 0.8rem;
+    padding: 0 0.5rem;
+  }
+  
+  .benefit-category {
+    padding: 0.8rem;
+  }
+  
+  .benefit-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .benefit-category h3 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .benefit-category li {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+  }
+  
+  /* Extra Small Mobile - Donate Section */
+  .donate-container {
+    padding: 1.5rem 0;
+  }
+  
+  .donate-box-placeholder {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .donate-box-placeholder h4 {
+    font-size: 1.3rem;
+  }
+  
+  .donate-box-placeholder p {
+    font-size: 0.9rem;
+  }
+  
+  .donate-btn {
+    width: 100%;
+    max-width: 250px;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+.tier-card {
+  background: #ffffff;
+  border: 2px solid var(--charcoal);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 450px; /* Reduced from 500px to make cards more compact */
+  height: auto; /* Allow cards to grow as needed */
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tier-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.tier-card.popular {
+  border-color: var(--deep-rose); /* Deep Rose from brand guide */
+  background: linear-gradient(135deg, var(--deep-rose) 0%, var(--salmon-pink) 100%); /* Gradient background */
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(200, 30, 93, 0.3);
+}
+
+.tier-card.popular:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 12px 25px rgba(200, 30, 93, 0.4);
+}
+
+.tier-card.popular .tier-header h3,
+.tier-card.popular .tier-header p,
+.tier-card.popular .tier-price,
+.tier-card.popular .tier-impact,
+.tier-card.popular .tier-features li,
+.tier-card.popular .price-period {
+  color: white;
+}
+
+.tier-card.popular .tier-impact {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--salmon-pink); /* Salmon Pink from brand guide */
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: var(--font-primary); /* Brand font */
+  border: 2px solid white;
+  white-space: nowrap;
+}
+
+.tier-header h3 {
+  font-size: 1.8rem;
+  font-weight: 700; /* Poppins Bold as per brand guide */
+  font-family: var(--font-primary); /* Brand font */
+  margin: 0 0 0.2rem 0; /* Reduced from 0.25rem */
+  color: var(--deep-rose); /* Deep Rose for Page Heading as per brand guide */
+  text-transform: none; /* Title Case as per brand guide */
+  letter-spacing: 0.02em;
+}
+
+.tier-header p {
+  font-size: 1rem;
+  color: var(--charcoal); /* Charcoal for Page subheading as per brand guide */
+  margin: 0 0 0.5rem 0; /* Reduced from 0.75rem to tighten spacing */
+  font-weight: 500; /* Poppins Medium as per brand guide */
+  font-family: var(--font-primary);
+}
+
+.tier-price {
+  font-size: 2.5rem;
+  font-weight: 700; /* Poppins Bold as per brand guide */
+  font-family: var(--font-primary);
+  color: var(--deep-rose); /* Deep Rose for emphasized text as per brand guide */
+  margin: 0.4rem 0; /* Reduced from 0.5rem */
+}
+
+.price-period {
+  font-size: 1rem;
+  color: var(--charcoal); /* Charcoal for body text as per brand guide */
+  font-weight: 400; /* Poppins Regular as per brand guide */
+  font-family: var(--font-primary);
+}
+
+.tier-impact {
+  background: rgba(200, 30, 93, 0.1); /* Light Deep Rose tint */
+  border: 1px solid rgba(200, 30, 93, 0.2);
+  border-radius: 8px;
+  padding: 0.4rem; /* Reduced from 0.5rem */
+  margin: 0.4rem 0; /* Reduced from 0.5rem */
+  font-weight: 600; /* Poppins SemiBold as per brand guide */
+  font-family: var(--font-primary);
+  color: var(--charcoal);
+  font-size: 0.85rem;
+}
+
+.tier-features {
+  list-style: none;
+  padding: 0;
+  margin: 0.4rem 0; /* Reduced from 0.5rem */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 180px; /* Reduced from 200px to make cards more compact */
+}
+
+.tier-features li {
+  padding: 0.2rem 0;
+  color: var(--charcoal); /* Charcoal for body text as per brand guide */
+  font-size: 0.8rem;
+  font-family: var(--font-primary);
+  font-weight: 400; /* Poppins Regular as per brand guide */
+  position: relative;
+  padding-left: 1.5rem;
+  line-height: 1.3;
+}
+
+.tier-features li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--deep-rose); /* Deep Rose checkmarks */
+  font-weight: 700; /* Poppins Bold as per brand guide */
+  font-size: 1rem;
+}
+
+.tier-card.popular .tier-features li:before {
+  color: white; /* White checkmarks for popular card */
+}
+
+/* Benefits Toggle Styling */
+.benefits-toggle-container {
+  position: relative;
+  margin: 0.4rem 0; /* Reduced from 0.5rem */
+  margin-top: auto; /* Push to bottom of available space */
+}
+
+.benefits-toggle-btn {
+  background: transparent;
+  color: var(--deep-rose);
+  border: 1px solid var(--deep-rose);
+  padding: 0.4rem 0.875rem; /* Reduced from 0.5rem 1rem */
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.4rem 0; /* Reduced from 0.5rem */
+  width: 100%;
+}
+
+.benefits-toggle-btn:hover {
+  background: var(--deep-rose);
+  color: white;
+}
+
+.tier-card.popular .benefits-toggle-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.tier-card.popular .benefits-toggle-btn:hover {
+  background: white;
+  color: var(--deep-rose);
+}
+
+.benefits-fade {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, white);
+  pointer-events: none;
+}
+
+.tier-card.popular .benefits-fade {
+  background: linear-gradient(to bottom, transparent, var(--deep-rose));
+}
+
+.hidden-benefits {
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.hidden-benefits.expanded {
+  overflow: visible;
+}
+
+
+
+.tier-join-btn {
+  background: var(--deep-rose); /* Deep Rose from brand guide */
+  color: white;
+  border: 2px solid var(--charcoal);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 700; /* Poppins Bold as per brand guide */
+  font-size: 1rem;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none; /* Sentence case as per brand guide */
+  letter-spacing: 0.02em; /* As per brand guide */
+  margin-top: auto;
+}
+
+.tier-join-btn:hover {
+  background: #a91752; /* Darker Deep Rose */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tier-card.popular .tier-join-btn {
+  background: white;
+  color: #c81e5d;
+  border: 2px solid white;
+}
+
+.tier-card.popular .tier-join-btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Donate Button Styling */
+.donate-btn {
+  background: var(--deep-rose);
+  color: white;
+  border: 2px solid var(--charcoal);
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.donate-btn:hover {
+  background: #a91752;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Donate Container Styling */
+.donate-container {
+  text-align: center;
+  padding: 3rem 0;
+  margin: 2rem 0;
+}
+
+.donate-box-placeholder {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.donate-box-placeholder h4 {
+  font-family: var(--font-accent);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--deep-rose);
+  margin-bottom: 1rem;
+}
+
+.donate-box-placeholder p {
+  font-size: 1.1rem;
+  color: var(--charcoal);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* What Donors Receive Section - Redesigned & Compact */
+.donor-benefits-section {
+  padding: 2.5rem 0;
+  background: linear-gradient(135deg, rgba(255, 249, 247, 0.6), rgba(253, 242, 248, 0.6));
+  border-top: 1px solid #f0f0f0;
+}
+
+.benefits-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.benefits-header h2 {
+  font-family: var(--font-accent);
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: var(--deep-rose);
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+}
+
+.benefits-header p {
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: var(--charcoal);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  word-wrap: break-word;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.benefit-category {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #f5f5f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.benefit-category::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--deep-rose), var(--salmon-pink));
+}
+
+.benefit-category:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-color: #e0e0e0;
+}
+
+.benefit-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.benefit-category h3 {
+  font-family: var(--font-accent);
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
+  font-weight: 700;
+  color: var(--deep-rose);
+  margin-bottom: 1rem;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.benefit-category ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.benefit-category li {
+  margin-bottom: 0.6rem;
+  padding: 0.3rem 0;
+  line-height: 1.4;
+  color: var(--charcoal);
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  word-wrap: break-word;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.benefit-category li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--deep-rose);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* New "Your Direct Impact" Section Styles */
+.impact-direct-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(255, 249, 247, 0.8), rgba(253, 242, 248, 0.8));
+  border-top: 1px solid #f0f0f0;
+}
+
+.impact-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.impact-title {
+  font-family: var(--font-accent);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 900;
+  color: var(--deep-rose);
+  text-align: center;
+  margin-bottom: 2rem;
+  word-wrap: break-word;
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.impact-items-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.impact-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: white;
+  border: 1px solid #fecdd3;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.impact-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.impact-icon {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #fef2f2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--deep-rose);
+}
+
+.impact-content h3 {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.impact-content p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.funding-details-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.funding-card {
+  background: white;
+  border: 1px solid #fecdd3;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.funding-image-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #fef2f2, #fecdd3);
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--deep-rose);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.funding-card h3 {
+  font-family: var(--font-accent);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--deep-rose);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.funding-card p {
+  font-size: 0.875rem;
+  color: #374151;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.fund-impact-btn {
+  width: 100%;
+  background: var(--deep-rose);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fund-impact-btn:hover {
+  background: #a0154a;
+  transform: translateY(-1px);
+}
+
+.fund-impact-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(200, 30, 93, 0.3);
+}
+
+/* Responsive styles for "What Donors Receive" */
+@media (max-width: 768px) {
+  .donor-benefits-section {
+    padding: 1.5rem 0;
+  }
+  .benefits-header {
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+  .benefits-header h2 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+  .benefits-header p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    padding: 0 1rem;
+  }
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 1rem;
+    max-width: 100%;
+  }
+  .benefit-category {
+    padding: 1.2rem;
+    margin: 0;
+  }
+  .benefit-icon {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  .benefit-category h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+  .benefit-category li {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .donor-benefits-section {
+    padding: 1rem 0;
+  }
+  .benefits-header h2 {
+    font-size: 1.4rem;
+    padding: 0 0.5rem;
+  }
+  .benefits-header p {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+  }
+  .benefits-grid {
+    gap: 0.8rem;
+    padding: 0 0.5rem;
+  }
+  .benefit-category {
+    padding: 0.8rem;
+  }
+  .benefit-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  .benefit-category h3 {
+    font-size: 1rem;
+    margin-bottom: 0.6rem;
+  }
+  .benefit-category li {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+  }
+}
+
+/* Responsive styles for "Your Direct Impact" section */
+@media (max-width: 1024px) {
+  .impact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .impact-items-column {
+    order: 2;
+  }
+  
+  .funding-details-column {
+    order: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .impact-direct-section {
+    padding: 2rem 0;
+  }
+  
+  .impact-container {
+    padding: 0 1rem;
+  }
+  
+  .impact-title {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .impact-grid {
+    gap: 1rem;
+  }
+  
+  .impact-card {
+    padding: 1rem;
+  }
+  
+  .impact-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+  
+  .impact-content h3 {
+    font-size: 0.9rem;
+  }
+  
+  .impact-content p {
+    font-size: 0.8rem;
+  }
+  
+  .funding-card {
+    padding: 1.25rem;
+  }
+  
+  .funding-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .funding-card p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .impact-direct-section {
+    padding: 1.5rem 0;
+  }
+  
+  .impact-container {
+    padding: 0 0.75rem;
+  }
+  
+  .impact-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .impact-card {
+    padding: 0.875rem;
+    gap: 0.75rem;
+  }
+  
+  .impact-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .impact-content h3 {
+    font-size: 0.85rem;
+  }
+  
+  .impact-content p {
+    font-size: 0.75rem;
+  }
+  
+  .funding-card {
+    padding: 1rem;
+  }
+  
+  .funding-card h3 {
+    font-size: 1rem;
+  }
+  
+  .funding-card p {
+    font-size: 0.75rem;
+  }
+  
+  .fund-impact-btn {
+    padding: 0.625rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Goal Thermometer Section Styles */
+.goal-thermometer-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(255, 249, 247, 0.6), rgba(253, 242, 248, 0.6));
+  border-top: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.thermometer-header {
+  margin-bottom: 2rem;
+}
+
+.thermometer-header h2 {
+  font-family: var(--font-accent);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 900;
+  color: var(--deep-rose);
+  margin-bottom: 0.75rem;
+  word-wrap: break-word;
+}
+
+.thermometer-header p {
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  color: var(--charcoal);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.thermometer-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Modern Campaign Progress Section Styles */
+.campaign-progress-section {
+  padding: 5rem 0;
+  background-color: #f9fafb; /* Lighter grey background */
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.progress-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.progress-header h2 {
+  font-family: var(--font-accent);
+  font-size: clamp(2.2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  color: #1f2937; /* Darker charcoal */
+  margin-bottom: 0.75rem;
+}
+
+.progress-header p {
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
+  color: #4b5563; /* Softer grey */
+  max-width: 650px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.progress-main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Left Column: Visuals */
+.progress-visual-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.progress-circle-container {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+  stroke: #e5e7eb;
+  fill: transparent;
+}
+
+.progress-ring-fill {
+  stroke-linecap: round;
+  fill: transparent;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.progress-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.progress-number {
+  font-family: var(--font-accent);
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1;
+}
+
+.progress-percent {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--deep-rose);
+  margin-left: 0.25rem;
+}
+
+.progress-label {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.progress-summary-text h3 {
+  font-family: var(--font-accent);
+  font-size: 1.5rem;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.progress-summary-text p {
+  color: #4b5563;
+  line-height: 1.6;
+  max-width: 350px;
+}
+
+/* Right Column: Stats */
+.progress-stats-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.07);
+  border-color: var(--deep-rose);
+}
+
+.stat-icon {
+  flex-shrink: 0;
+  background-color: #fee2e2;
+  color: var(--deep-rose);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stat-content {
+  text-align: left;
+}
+
+.stat-number {
+  font-family: var(--font-accent);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* Zeffy Thermometer */
+.thermometer-wrapper {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.thermometer-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .progress-main-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .campaign-progress-section {
+    padding: 3rem 0;
+  }
+  .progress-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-main-content {
+    padding: 0 1rem;
+  }
+  .stat-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  .stat-content {
+    text-align: center;
+  }
+}
+
+/* Consistent section spacing */
+.membership-section,
+.campaign-progress-section,
+.impact-direct-section,
+.donor-benefits-section,
+.testimonials-section,
+.stats {
+  margin-top: 40px; /* reduced top margin */
+}
+
+/* Blend tiers into campaign progress */
+.membership-section {
+  position: relative;
+  padding-bottom: 48px; /* extra breathing room before blend */
+}
+
+.membership-section::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 80px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(249, 250, 251, 0.5) 35%, rgba(249, 250, 251, 0.9) 100%);
+  pointer-events: none;
+}
+
+.campaign-progress-section {
+  padding-top: 24px; /* reduce top padding to bring sections closer */
+  background: linear-gradient(180deg, rgba(249,250,251,1) 0%, rgba(249,250,251,1) 100%);
+}
+
+/* Section framing and anchor offset */
+.membership-section,
+.campaign-progress-section,
+.impact-direct-section,
+.donor-benefits-section,
+.testimonials-section,
+.stats {
+  border-radius: 16px;
+  overflow: clip; /* prevent child shadows from clipping oddly on iOS */
+}
+
+/* Prevent anchor scroll overshoot due to fixed/sticky header */
+#tiers,
+#progress,
+#impact,
+#benefits {
+  scroll-margin-top: 96px; /* matches header + safe breathing room */
+}
+
+
+
