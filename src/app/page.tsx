@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import CountdownTimer from './components/CountdownTimer';
 import RollingNumber from './components/RollingNumber';
@@ -21,6 +21,72 @@ export default function Home() {
     setIsMobileMenuOpen(false);
   };
 
+  // Detect Zeffy popup state and hide/show navbar accordingly
+  useEffect(() => {
+    const handleZeffyPopup = () => {
+      // Check if any Zeffy iframe is visible and has significant size
+      const zeffyIframes = document.querySelectorAll('iframe[src*="zeffy.com"]');
+      const hasVisibleZeffy = Array.from(zeffyIframes).some(iframe => {
+        const rect = iframe.getBoundingClientRect();
+        const isLargeEnough = rect.width > 300 && rect.height > 200; // Only count large popups
+        const isVisible = rect.width > 0 && rect.height > 0 && 
+                         rect.top < window.innerHeight && 
+                         rect.bottom > 0;
+        return isLargeEnough && isVisible;
+      });
+      
+      if (hasVisibleZeffy) {
+        document.body.classList.add('zeffy-popup-active');
+        // Add close button if it doesn't exist
+        if (!document.querySelector('.zeffy-close-btn')) {
+          const closeBtn = document.createElement('button');
+          closeBtn.className = 'zeffy-close-btn';
+          closeBtn.innerHTML = '×';
+          closeBtn.onclick = () => {
+            // Close all Zeffy iframes
+            zeffyIframes.forEach(iframe => {
+              if (iframe.parentElement) {
+                iframe.parentElement.remove();
+              }
+            });
+            document.body.classList.remove('zeffy-popup-active');
+            closeBtn.remove();
+          };
+          document.body.appendChild(closeBtn);
+        }
+      } else {
+        document.body.classList.remove('zeffy-popup-active');
+        // Remove close button if it exists
+        const closeBtn = document.querySelector('.zeffy-close-btn');
+        if (closeBtn) {
+          closeBtn.remove();
+        }
+      }
+    };
+
+    // Check for Zeffy popups every 300ms for better responsiveness
+    const interval = setInterval(handleZeffyPopup, 300);
+    
+    // Also check when window gains focus (popup closed)
+    const handleFocus = () => {
+      setTimeout(handleZeffyPopup, 100);
+    };
+    
+    // Check when URL changes (popup might have opened/closed)
+    const handleUrlChange = () => {
+      setTimeout(handleZeffyPopup, 100);
+    };
+    
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('popstate', handleUrlChange);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('popstate', handleUrlChange);
+    };
+  }, []);
+
   return (
     <>
       {/* Floating Hamburger Menu */}
@@ -38,10 +104,10 @@ export default function Home() {
       {/* Mobile slide-in menu */}
       <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
         <ul>
+          <li><a href="https://thebeayoutifulfoundation.com/" target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu}>MAIN WEBSITE</a></li>
           <li><a href="#tiers" onClick={closeMobileMenu}>DONATE</a></li>
           <li><a href="#progress" onClick={closeMobileMenu}>PROGRESS</a></li>
-          <li><a href="#impact" onClick={closeMobileMenu}>IMPACT</a></li>
-          <li><a href="#benefits" onClick={closeMobileMenu}>BENEFITS</a></li>
+                          <li><a href="#testimonials" onClick={closeMobileMenu}>IMPACT</a></li>
         </ul>
       </div>
 
@@ -52,10 +118,10 @@ export default function Home() {
             <h3>BeaYOUtiful Foundation</h3>
           </div>
           <ul className="desktop-nav">
+            <li><a href="https://thebeayoutifulfoundation.com/" target="_blank" rel="noopener noreferrer">MAIN WEBSITE</a></li>
             <li><a href="#tiers">DONATE</a></li>
             <li><a href="#progress">PROGRESS</a></li>
-            <li><a href="#impact">IMPACT</a></li>
-            <li><a href="#benefits">BENEFITS</a></li>
+                            <li><a href="#testimonials">IMPACT</a></li>
           </ul>
         </nav>
       </header>
@@ -139,12 +205,16 @@ export default function Home() {
           <AnimatedSection id="tiers" className="container">
             <div className="membership-section">
               <motion.div className="membership-header" variants={staggerContainerVariants}>
-                <h2 className="membership-title">One of the Hundred</h2>
+                <h2 className="section-title">One of the Hundred</h2>
                 <p className="membership-subtitle">
                   We&apos;re building a community of 100 committed donors who believe every young person deserves confidence, self-worth, and a safe space to grow. Pledging $25 a month, you become part of One of the Hundred—a circle of change-makers who keep our programs running all year long.
                 </p>
               </motion.div>
-              <motion.div className="tiers-grid" variants={staggerContainerVariants}>
+              
+              {/* New layout: Changemaker card + Your Direct Impact side by side */}
+              <motion.div className="tiers-impact-grid" variants={staggerContainerVariants}>
+                {/* Left: Changemaker Card */}
+                <div className="tier-card-wrapper">
                 <PricingTierCard
                   title="Changemaker"
                   subtitle="Maximum Impact"
@@ -160,21 +230,121 @@ export default function Home() {
                     "Free digital event access",
                     "Founding changemaker recognition"
                   ]}
-                  ctaText="Become a Changemaker"
+                    ctaText="Become a Changemaker - Donate Now!"
                   isPopular={true}
                   highlightLabel="Top Impact"
                   donationUrl="https://www.zeffy.com/embed/donation-form/one-of-the-hundred?modal=true&amount=25"
                 />
-                <PricingTierCard
-                  title="Supporter"
-                  subtitle="Entry-Level Impact"
-                  price="$5"
-                  pricePeriod="/ month"
-                  impact="Funds 1 young person's supplies"
-                  benefits={["Bi-Annual newsletter", "Program achievements"]}
-                  ctaText="Join"
-                  donationUrl="https://www.zeffy.com/embed/donation-form/one-of-the-hundred?modal=true&amount=5"
-                />
+                </div>
+                
+                {/* Right: Your Direct Impact Section */}
+                <div className="impact-sidebar">
+                  <div className="impact-sidebar-content">
+                    <h3>Your Direct Impact</h3>
+                    
+                    <div className="impact-items">
+                      <div className="impact-item">
+                        <div className="impact-icon">🎯</div>
+                        <div className="impact-content">
+                          <h4>Funds Confidence Workshops</h4>
+                          <p>Your monthly gift provides supplies, materials, and resources for skill-building workshops.</p>
+                        </div>
+                      </div>
+
+                      <div className="impact-item">
+                        <div className="impact-icon">❤️</div>
+                        <div className="impact-content">
+                          <h4>Supports Mental Wellness</h4>
+                          <p>You enable access to self-worth programming and mental health tools for vulnerable youth.</p>
+                        </div>
+                      </div>
+
+                      <div className="impact-item">
+                        <div className="impact-icon">✨</div>
+                        <div className="impact-content">
+                          <h4>Creates Lasting Change</h4>
+                          <p>You build confidence, leadership, and community connection that lasts.</p>
+                        </div>
+                      </div>
+
+                      <div className="impact-item">
+                        <div className="impact-icon">🧭</div>
+                        <div className="impact-content">
+                          <h4>Guides Positive Choices</h4>
+                          <p>Mentorship sessions help participants navigate school, friendships, and online life.</p>
+                        </div>
+                      </div>
+
+                      <div className="impact-item">
+                        <div className="impact-icon">📚</div>
+                        <div className="impact-content">
+                          <h4>Supplies Learning Tools</h4>
+                          <p>Materials and journals support reflection and real habit change.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="funding-summary">
+                      <h4>What Your Investment Funds</h4>
+                      <p>Your $25/month directly funds program materials, workshop supplies, mentorship resources, and mental wellness tools for young people who need them most. Based on current costs this supports about 2 participants each month.</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              {/* What You Receive as a Member - Now positioned underneath */}
+              <motion.div className="member-benefits-section" variants={staggerContainerVariants}>
+                <div className="benefits-header">
+                  <h3 className="section-title">What You Receive as a Member</h3>
+                  <p>Join &quot;One of the Hundred&quot; and enjoy these exclusive benefits</p>
+                </div>
+                
+                <div className="benefits-grid">
+                  <motion.div 
+                    className="benefit-category"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 1.2 }}
+                  >
+                    <div className="benefit-icon">🏆</div>
+                    <h3>1. Exclusive Recognition</h3>
+                    <ul>
+                      <li><strong>Personalized Welcome Kit</strong> - Digital welcome newsletter with video from our team and participants</li>
+                      <li><strong>Digital Badge</strong> - Branded &quot;One of the Hundred&quot; badge to share on social media</li>
+                      <li><strong>Name Recognition</strong> - Listed on dedicated webpage and featured on annual &quot;Wall of Impact&quot;</li>
+                    </ul>
+                  </motion.div>
+
+                  <motion.div 
+                    className="benefit-category"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 1.4 }}
+                  >
+                    <div className="benefit-icon">✨</div>
+                    <h3>2. Inside Access & Updates</h3>
+                    <ul>
+                      <li><strong>Quarterly Impact Reports</strong> - Stories, photos, and updates on how your gifts change lives</li>
+                      <li><strong>Member-Only Updates</strong> - Behind-the-scenes videos from workshops and programs</li>
+                      <li><strong>Early Event Access</strong> - Pre-sale registration for galas, events, and volunteer opportunities</li>
+                      <li><strong>Free Digital Event</strong> - Access to wellness or leadership development events</li>
+                    </ul>
+                  </motion.div>
+
+                  <motion.div 
+                    className="benefit-category"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 1.6 }}
+                  >
+                    <div className="benefit-icon">🎉</div>
+                    <h3>3. Special Appreciation Moments</h3>
+                    <ul>
+                      <li><strong>Annual Celebration Call</strong> - A virtual thank-you with mentors, participants, and staff</li>
+                      <li><strong>Networking Events</strong> - Potential free networking event in Vancouver or free ticket to community gathering events</li>
+                    </ul>
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
           </AnimatedSection>
@@ -188,7 +358,7 @@ export default function Home() {
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
             >
               <div className="progress-header">
-                <h2>Campaign Progress</h2>
+                <h2 className="section-title">Campaign Progress</h2>
                 <p>Join the movement and see our impact grow in real-time.</p>
               </div>
               
@@ -272,9 +442,8 @@ export default function Home() {
                 </div>
               </div>
               
-              {/* Zeffy Thermometer */}
-              <div className="thermometer-wrapper">
-                <div className="thermometer-container">
+              {/* Progress Bar Integrated */}
+              <div className="progress-bar-integrated">
                   <div style={{position:'relative',overflow:'hidden',width:'100%',paddingTop:'120px'}}>
                     <iframe 
                       title='Donation form powered by Zeffy' 
@@ -282,272 +451,18 @@ export default function Home() {
                       src='https://www.zeffy.com/embed/thermometer/one-of-the-hundred'  
                       allow="payment"
                     />
-                  </div>
                 </div>
               </div>
             </motion.div>
           </AnimatedSection>
 
-          <AnimatedSection id="impact" className="container">
-                     {/* Updated "Your Direct Impact" Section */}
+          
+
+
+
+          <AnimatedSection className="container">
             <motion.section 
-              className="impact-direct-section"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
-            >
-              <div className="impact-container">
-                <motion.h2 
-                  className="impact-title"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }}
-                >
-                  Your Direct Impact
-                </motion.h2>
-
-                <div className="impact-grid">
-                  {/* Left column - impact items */}
-                  <motion.div 
-                    className="impact-items-column"
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
-                  >
-                    <div className="impact-card">
-                      <div className="impact-icon">🎯</div>
-                      <div className="impact-content">
-                        <h3>Funds Confidence Workshops</h3>
-                        <p>Your monthly gift provides supplies, materials, and resources for skill-building workshops.</p>
-                      </div>
-                    </div>
-
-                    <div className="impact-card">
-                      <div className="impact-icon">❤️</div>
-                      <div className="impact-content">
-                        <h3>Supports Mental Wellness</h3>
-                        <p>You enable access to self-worth programming and mental health tools for vulnerable youth.</p>
-                      </div>
-                    </div>
-
-                    <div className="impact-card">
-                      <div className="impact-icon">✨</div>
-                      <div className="impact-content">
-                        <h3>Creates Lasting Change</h3>
-                        <p>You build confidence, leadership, and community connection that lasts.</p>
-                      </div>
-                    </div>
-
-                    <div className="impact-card">
-                      <div className="impact-icon">🧭</div>
-                      <div className="impact-content">
-                        <h3>Guides Positive Choices</h3>
-                        <p>Mentorship sessions help participants navigate school, friendships, and online life.</p>
-                      </div>
-                    </div>
-
-                    <div className="impact-card">
-                      <div className="impact-icon">📚</div>
-                      <div className="impact-content">
-                        <h3>Supplies Learning Tools</h3>
-                        <p>Materials and journals support reflection and real habit change.</p>
-                      </div>
-                    </div>
-                  </motion.div>
-
-                  {/* Right column - funding details */}
-                  <motion.div 
-                    className="funding-details-column"
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, ease: "easeOut", delay: 1.2 }}
-                  >
-                    <div className="funding-card">
-                      {/* Image placeholder */}
-                      <div className="funding-image-placeholder">
-                        <div className="placeholder-content">
-                          <span>Photo coming soon</span>
-                        </div>
-                      </div>
-
-                      <h3>What Your Investment Funds</h3>
-                      <p>
-                        Your $25/month directly funds program materials, workshop supplies, mentorship resources, and mental wellness tools for young people who need them most. Based on current costs this supports about 2 participants each month. Your investment creates measurable, lasting impact.
-                      </p>
-
-                      <button 
-                        className="fund-impact-btn"
-                        onClick={() => {
-                          // Open Zeffy modal with $25 pre-filled
-                          const modal = document.createElement('div');
-                          modal.style.cssText = `
-                            position: fixed;
-                            top: 0;
-                            left: 0;
-                            width: 100vw;
-                            height: 100vh;
-                            background-color: rgba(0,0,0,0.8);
-                            z-index: 99999;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                          `;
-                          
-                          const modalContent = document.createElement('div');
-                          modalContent.style.cssText = `
-                            position: relative;
-                            width: 90%;
-                            max-width: 800px;
-                            height: 80%;
-                            background-color: white;
-                            border-radius: 8px;
-                            overflow: hidden;
-                          `;
-                          
-                          const closeBtn = document.createElement('button');
-                          closeBtn.innerHTML = '×';
-                          closeBtn.style.cssText = `
-                            position: absolute;
-                            top: 10px;
-                            right: 15px;
-                            background: none;
-                            border: none;
-                            font-size: 24px;
-                            cursor: pointer;
-                            color: #333;
-                            z-index: 1;
-                          `;
-                          
-                          const iframe = document.createElement('iframe');
-                          iframe.src = 'https://www.zeffy.com/embed/donation-form/one-of-the-hundred?modal=true&amount=25';
-                          iframe.style.cssText = 'width: 100%; height: 100%; border: none; border-radius: 8px;';
-                          iframe.title = 'Donation Form';
-                          
-                          closeBtn.onclick = () => modal.remove();
-                          modal.onclick = (e) => {
-                            if (e.target === modal) modal.remove();
-                          };
-                          
-                          modalContent.appendChild(closeBtn);
-                          modalContent.appendChild(iframe);
-                          modal.appendChild(modalContent);
-                          document.body.appendChild(modal);
-                        }}
-                      >
-                        Make Your Impact - Donate Now!
-                      </button>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.section>
-
-            {/* What Donors Receive Section */}
-            <motion.section 
-              id="benefits"
-              className="donor-benefits-section"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 1.0 }}
-            >
-              <div className="benefits-header">
-                <h2>What You Receive as a Member</h2>
-                <p>Join &quot;One of the Hundred&quot; and enjoy these exclusive benefits</p>
-              </div>
-              
-              <div className="benefits-grid">
-                <motion.div 
-                  className="benefit-category"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 1.2 }}
-                >
-                  <div className="benefit-icon">🏆</div>
-                  <h3>1. Exclusive Recognition</h3>
-                  <ul>
-                    <li><strong>Personalized Welcome Kit</strong> - Digital welcome newsletter with video from our team and participants</li>
-                    <li><strong>Digital Badge</strong> - Branded &quot;One of the Hundred&quot; badge to share on social media</li>
-                    <li><strong>Name Recognition</strong> - Listed on dedicated webpage and featured on annual &quot;Wall of Impact&quot;</li>
-                  </ul>
-                </motion.div>
-
-                <motion.div 
-                  className="benefit-category"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 1.4 }}
-                >
-                  <div className="benefit-icon">✨</div>
-                  <h3>2. Inside Access & Updates</h3>
-                  <ul>
-                    <li><strong>Quarterly Impact Reports</strong> - Stories, photos, and updates on how your gifts change lives</li>
-                    <li><strong>Member-Only Updates</strong> - Behind-the-scenes videos from workshops and programs</li>
-                    <li><strong>Early Event Access</strong> - Pre-sale registration for galas, events, and volunteer opportunities</li>
-                    <li><strong>Free Digital Event</strong> - Access to wellness or leadership development events</li>
-                  </ul>
-                </motion.div>
-
-                <motion.div 
-                  className="benefit-category"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 1.6 }}
-                >
-                  <div className="benefit-icon">🎉</div>
-                  <h3>3. Special Appreciation Moments</h3>
-                  <ul>
-                    <li><strong>Annual Celebration Call</strong> - A virtual thank-you with mentors, participants, and staff</li>
-                    <li><strong>Networking Events</strong> - Potential free networking event in Vancouver or free ticket to community gathering events</li>
-                  </ul>
-                </motion.div>
-              </div>
-            </motion.section>
-
-            {/* Updated Stats Section */}
-            <motion.section 
-              className="stats"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              <motion.div 
-                className="stat-item"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-              >
-                <RollingNumber 
-                  value={30000} 
-                  prefix="$" 
-                  className="stat-number"
-                  duration={2000}
-                  delay={300}
-                />
-                <div className="stat-label">CAMPAIGN GOAL</div>
-              </motion.div>
-              <motion.div 
-                className="stat-item"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-              >
-                <RollingNumber 
-                  value={0} // This will be the live counter
-                  suffix="/100"
-                  className="stat-number"
-                  duration={2000}
-                  delay={600}
-                />
-                <div className="stat-label">DONORS</div>
-              </motion.div>
-            </motion.section>
-
-            {/* ... (Testimonials and other sections remain) ... */}
-
-            <motion.section 
+              id="testimonials"
               className="testimonials-section"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -561,7 +476,7 @@ export default function Home() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <h2 className="testimonials-title">VOICES OF IMPACT</h2>
+                <h2 className="section-title">VOICES OF IMPACT</h2>
                 <p className="testimonials-subtitle">
                   Hear from the young people and supporters whose lives have been transformed.
                 </p>
@@ -629,7 +544,7 @@ export default function Home() {
               <ul>
                 <li><a href="#tiers">Donate</a></li>
                 <li><a href="#tiers">Membership Tiers</a></li>
-                <li><a href="#impact">Our Impact</a></li>
+                <li><a href="#testimonials">Our Impact</a></li>
                 <li><a href="#about">About Us</a></li>
               </ul>
             </div>

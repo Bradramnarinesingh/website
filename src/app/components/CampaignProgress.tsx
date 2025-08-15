@@ -43,6 +43,7 @@ export default function CampaignProgress({ className = "" }: CampaignProgressPro
       setData(mockData);
     } catch (err) {
       setError('Unable to load live data. Showing zeros.');
+      console.error('Error fetching data:', err);
     } finally {
       setLoading(false);
     }
@@ -54,7 +55,7 @@ export default function CampaignProgress({ className = "" }: CampaignProgressPro
     // Poll every 30 seconds
     const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchData]);
 
   const donorsProgress = data ? (data.donorsCurrent / data.donorsTarget) : 0;
   const revenueProgress = data ? (data.monthlyRevenue / data.monthlyGoal) : 0;
@@ -69,9 +70,8 @@ export default function CampaignProgress({ className = "" }: CampaignProgressPro
     }).format(amount);
   };
 
-  const AnimatedNumber = ({ value, previousValue, prefix = "", suffix = "" }: { 
+  const AnimatedNumber = ({ value, prefix = "", suffix = "" }: { 
     value: number; 
-    previousValue?: number; 
     prefix?: string; 
     suffix?: string; 
   }) => (
@@ -92,16 +92,6 @@ export default function CampaignProgress({ className = "" }: CampaignProgressPro
         <div className="skeleton-number"></div>
         <div className="skeleton-label"></div>
         <div className="skeleton-subtitle"></div>
-      </div>
-    </div>
-  );
-
-  const SkeletonStat = () => (
-    <div className="kpi-stat skeleton">
-      <div className="skeleton-icon"></div>
-      <div className="kpi-content">
-        <div className="skeleton-kpi-number"></div>
-        <div className="skeleton-kpi-label"></div>
       </div>
     </div>
   );
@@ -168,7 +158,6 @@ export default function CampaignProgress({ className = "" }: CampaignProgressPro
                 <div className="ring-number">
                   <AnimatedNumber 
                     value={data?.donorsCurrent || 0} 
-                    previousValue={previousData?.donorsCurrent}
                   />
                 </div>
                 <div className="ring-label">of {data?.donorsTarget || 100}</div>
@@ -189,7 +178,6 @@ export default function CampaignProgress({ className = "" }: CampaignProgressPro
                 ) : (
                   <AnimatedNumber 
                     value={data?.kidsFunded || 0} 
-                    previousValue={previousData?.kidsFunded}
                   />
                 )}
               </div>
@@ -220,7 +208,6 @@ export default function CampaignProgress({ className = "" }: CampaignProgressPro
                 ) : (
                   <AnimatedNumber 
                     value={spotsLeft} 
-                    previousValue={previousData ? (previousData.donorsTarget - previousData.donorsCurrent) : undefined}
                   />
                 )}
               </div>

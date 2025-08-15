@@ -7,9 +7,10 @@ interface AnimatedSectionProps {
   children: React.ReactNode;
   className?: string;
   id?: string;
+  style?: React.CSSProperties;
 }
 
-export default function AnimatedSection({ children, className, id }: AnimatedSectionProps) {
+export default function AnimatedSection({ children, className, id, style }: AnimatedSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -18,6 +19,7 @@ export default function AnimatedSection({ children, className, id }: AnimatedSec
       id={id}
       ref={ref}
       className={className}
+      style={style}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={fadeUpVariants}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import RollingNumber from './RollingNumber';
+import Image from 'next/image';
 
 const testimonials = [
   {
@@ -72,9 +73,11 @@ export default function TestimonialSlider() {
                 {/* Avatar */}
                 <div className="flex-shrink-0">
                   <div className="relative">
-                    <img 
+                    <Image 
                       src={testimonials[currentIndex].avatar}
                       alt={testimonials[currentIndex].author}
+                      width={128}
+                      height={128}
                       className="w-32 h-32 rounded-full object-cover shadow-xl border-4 border-white"
                     />
                     <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center">

@@ -2,7 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Poppins:wght@400;500;600;700&display=swap');
 
 /* Smooth scrolling for anchor links */
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth; 
+  margin: 0;
+  padding: 0;
+}
 
 :root {
   --deep-rose: #c81e5d;
@@ -33,6 +37,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
 }
 
 /* Global background root container */
@@ -222,7 +228,7 @@ header {
   transform: translateX(-50%);
   width: calc(100% - 48px);
   max-width: 1152px;
-  z-index: 1000;
+  z-index: 10;
   background: var(--deep-rose);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -514,12 +520,25 @@ button:active, .tier-join-btn:active {
 @media (min-width: 769px) {
   main {
     margin-top: 110px;
+    margin-bottom: 0;
   }
+}
+
+/* Ensure consistent bottom spacing */
+main > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Remove any extra bottom margins from sections */
+section:last-child,
+.AnimatedSection:last-child {
+  margin-bottom: 0 !important;
 }
 
 /* 3 — Hero Section */
 .hero {
   display: flex;
+  align-items: center;
   position: relative;
   background: var(--deep-rose);
   overflow: hidden;
@@ -528,12 +547,21 @@ button:active, .tier-join-btn:active {
   width: calc(100% - 48px);
   max-width: 1152px;
   margin: 0 auto;
+  min-height: 50vh; /* Reverted to original size for larger screens */
 }
 
 .hero-content {
   flex: 1;
-  padding: 80px 48px;
+  padding: 4rem 3rem; /* Added padding for content */
   z-index: 2;
+}
+
+/* Ensure desktop hero height is maintained with high specificity */
+@media (min-width: 1441px) {
+  main .hero,
+  .hero-container .hero {
+    min-height: 50vh;
+  }
 }
 
 .hero-badge, .hero-tagline {
@@ -544,15 +572,26 @@ button:active, .tier-join-btn:active {
   font-weight: 700;
   margin-bottom: 24px;
   text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  vertical-align: top; /* Ensure both elements are aligned at the top */
 }
 
 .hero-badge {
     background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 32px; /* Add space between badge and tagline */
+    margin-right: 16px; /* Add horizontal space between badge and tagline */
 }
 
 .hero-tagline {
   background: white;
   color: var(--deep-rose);
+  border: 1px solid rgba(200, 30, 93, 0.2);
 }
 
 .hero-content h1 {
@@ -668,6 +707,43 @@ button:active, .tier-join-btn:active {
   grid-template-columns: 2fr 1fr;
   gap: 48px;
   padding: 80px 0;
+}
+
+/* UNIFIED SECTION TITLES - ALL SAME SIZE */
+.section-title,
+.progress-header h2,
+.benefits-header h2,
+.membership-title,
+.testimonials-title,
+.impact-title {
+  font-family: var(--font-accent);
+  font-size: 42px !important;
+  font-weight: 900;
+  color: var(--deep-rose);
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+/* UNIFIED SECTION SPACING */
+.membership-section,
+.campaign-progress-section,
+.impact-direct-section,
+.donor-benefits-section,
+.testimonials-section {
+  padding-top: 40px;
+}
+
+.section-header,
+.progress-header,
+.benefits-header,
+.membership-header,
+.testimonials-header {
+  text-align: center;
+  margin-bottom: 48px;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .support-header {
@@ -801,7 +877,9 @@ button:active, .tier-join-btn:active {
     max-width: 600px; 
 }
 
-.membership-title {
+.membership-title,
+.testimonials-title,
+.impact-title {
   font-family: var(--font-accent);
   font-size: 42px;
   font-weight: 900;
@@ -907,12 +985,12 @@ button:active, .tier-join-btn:active {
 
 /* 7 — Testimonials Section */
 .testimonials-section {
-  padding: 80px 0;
+  padding: 40px 0;
 }
 
 .testimonials-header {
   text-align: center;
-  margin: 0 auto 60px;
+  margin: 0 auto 32px;
   max-width: 600px;
 }
 
@@ -939,7 +1017,7 @@ button:active, .tier-join-btn:active {
 .testimonial-card {
   background-color: #fff;
   border-radius: var(--border-radius);
-  padding: 32px;
+  padding: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   border: 1px solid #eee;
 }
@@ -986,7 +1064,7 @@ button:active, .tier-join-btn:active {
 .footer {
   background-color: var(--charcoal);
   color: #fff;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .footer-content {
@@ -1082,10 +1160,10 @@ button:active, .tier-join-btn:active {
         flex-direction: column;
         text-align: center;
         margin: 0;
+        min-height: 60vh; 
     }
     .hero-content {
         max-width: 100%;
-        padding: 48px 24px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1102,6 +1180,14 @@ button:active, .tier-join-btn:active {
     .hero-content h2 {
         font-size: 18px;
     }
+}
+
+/* Ensure tablet hero height is maintained with high specificity */
+@media (min-width: 769px) and (max-width: 1024px) {
+  main .hero,
+  .hero-container .hero {
+    min-height: 60vh;
+  }
 }
 
 /* Hamburger menu base styles */
@@ -1361,10 +1447,10 @@ button:active, .tier-join-btn:active {
   .hero {
     margin: 0;
     border-radius: 0;
-    min-height: 60vh;
+    min-height: 55vh; 
     background: 
-      linear-gradient(135deg, rgba(200, 30, 93, 0.85), rgba(232, 84, 88, 0.85)),
-      url('https://thebeayoutifulfoundation.com/wp-content/uploads/2020/10/InspiredByHer2020_POR_WEB-89.jpg');
+      linear-gradient(135deg, rgba(200, 30, 93, 0.9), rgba(232, 84, 88, 0.9)),
+      url('https://thebeayoutifulfoundation.com/wp-content/uploads/2020/10/InspiredByHer2020_PAR_WEB-89.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1372,6 +1458,8 @@ button:active, .tier-join-btn:active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    padding: 80px 24px 32px;
   }
   
   /* Three-women image with magenta gradient overlay */
@@ -1406,35 +1494,50 @@ button:active, .tier-join-btn:active {
   }
   
   .hero-content {
-    padding: 80px 24px 32px;
+    padding: 80px 24px 32px; /* Reduced padding to prevent content cutoff */
     text-align: center;
     z-index: 3;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 400px;
+    max-width: 100%;
+    width: 100%;
   }
   
   .hero-content h1 {
-    font-size: 36px;
-    margin-bottom: 16px;
+    font-size: clamp(32px, 8vw, 48px); /* Responsive font sizing */
+    margin-bottom: 20px;
+    line-height: 1.1;
+    word-wrap: break-word;
   }
   
   .hero-content h2 {
-    font-size: 16px;
+    font-size: clamp(14px, 4vw, 18px); /* Responsive font sizing */
     margin-bottom: 32px;
+    line-height: 1.5;
+    max-width: 90%;
+    word-wrap: break-word;
+    color: white; /* Changed to white for mobile hero tagline */
   }
   
   /* Centre-stack Giving Tuesday headline */
   .countdown-container {
     text-align: center;
     width: 100%;
+    margin-top: 20px;
   }
   
   .countdown-container h3 {
-    font-size: 24px;
+    font-size: clamp(20px, 5vw, 28px); /* Responsive font sizing */
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  
+  .countdown-container p {
+    font-size: clamp(14px, 3.5vw, 16px);
     margin-bottom: 20px;
+    opacity: 0.9;
   }
   
   /* Compact countdown - inline pill-style blocks */
@@ -1442,26 +1545,48 @@ button:active, .tier-join-btn:active {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
     max-width: 100%;
   }
   
   .countdown-item {
     flex: 0 0 auto;
-    min-width: 70px;
-    padding: 12px 8px;
+    min-width: 60px;
+    padding: 10px 6px;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
   
   .countdown-number {
-    font-size: 24px;
+    font-size: clamp(20px, 5vw, 28px); /* Responsive font sizing */
     font-weight: 900;
+    line-height: 1;
   }
   
   .countdown-label {
-    font-size: 10px;
+    font-size: clamp(8px, 2.5vw, 12px);
     opacity: 0.9;
+    line-height: 1.2;
+  }
+
+  /* Hero badge and tagline mobile adjustments */
+  .hero-badge, .hero-tagline {
+    margin-bottom: 16px;
+    font-size: clamp(10px, 3vw, 14px);
+    padding: 8px 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+  }
+
+  .hero-badge span, .hero-tagline span {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .stats {
@@ -1575,6 +1700,155 @@ button:active, .tier-join-btn:active {
 
 body.has-global-bg .global-bg {
   display: none;
+}
+
+/* Additional mobile hero improvements */
+@media (max-width: 768px) {
+  /* Ensure hero takes proper mobile height */
+  .hero {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  
+  /* Improve background image display */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(135deg, rgba(200, 30, 93, 0.85), rgba(232, 84, 88, 0.85)),
+      url('https://thebeayoutifulfoundation.com/wp-content/uploads/2020/10/InspiredByHer2020_POR_WEB-89.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+  
+  /* Ensure content is above background */
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 100px 20px 40px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Improve text readability on mobile */
+  .hero-content h1 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 24px;
+  }
+  
+  .hero-content h2 {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    margin-bottom: 32px;
+  }
+  
+  /* Better countdown display on mobile */
+  .countdown-container {
+    margin-top: 24px;
+    padding: 0 10px;
+  }
+  
+  .countdown-timer {
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .countdown-item {
+    min-width: 55px;
+    padding: 8px 4px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Ensure badges and taglines are readable */
+  .hero-badge, .hero-tagline {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 20px;
+  }
+  
+  /* Mobile hero tagline - white text */
+  .hero-tagline {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Fallback for browsers without backdrop-filter support */
+  @supports not (backdrop-filter: blur(8px)) {
+    .hero-badge, .hero-tagline {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .countdown-item {
+      background: rgba(255, 255, 255, 0.4);
+    }
+  }
+  
+  /* Hide desktop image wrapper on mobile */
+  .hero-image-wrapper {
+    display: none;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .hero-content {
+    padding: 90px 16px 32px;
+  }
+  
+  .hero-content h1 {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+  
+  .hero-content h2 {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 24px;
+  }
+  
+  .countdown-container h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .countdown-container p {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .countdown-item {
+    min-width: 50px;
+    padding: 6px 3px;
+  }
+  
+  .countdown-number {
+    font-size: 18px;
+  }
+  
+  .countdown-label {
+    font-size: 8px;
+  }
+  
+  .hero-badge, .hero-tagline {
+    font-size: 10px;
+    padding: 6px 10px;
+    margin-bottom: 16px;
+  }
 }
 
 

@@ -9,6 +9,7 @@
   --charcoal: #1e1e1e;
   --font-primary: 'Poppins', sans-serif;
   --font-accent: 'Playfair Display', serif;
+  --sticky-top-offset: 112px; /* header 24px offset + ~72px height + margin */
 }
 
 .support-and-mission-container {
@@ -126,12 +127,90 @@
     }
 }
 
-/* Hero Section - Make it shorter */
-.hero {
-  min-height: 70vh; /* Reduced from default */
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+/* All hero section styles are now managed in globals.css */
+
+/* MEDIUM SCREEN OPTIMIZATION - For MacBook, iPad, and Laptops */
+@media (min-width: 1024px) and (max-width: 1600px) {
+  /* Adjust hero section for better medium screen proportions */
+  .hero {
+    min-height: 45vh; /* Slightly reduce height */
+  }
+  
+  .hero-content {
+    padding: 3rem 2.5rem; /* Reduce padding proportionally */
+  }
+  
+  .hero-content h1 {
+    font-size: 56px; /* Reduce from 64px */
+    line-height: 1.1;
+  }
+  
+  .hero-content h2 {
+    font-size: 18px; /* Reduce from 20px */
+    margin-bottom: 32px; /* Reduce from 40px */
+  }
+  
+  /* Adjust countdown for medium screens */
+  .countdown-container h3 {
+    font-size: 24px; /* Reduce from 28px */
+    margin-bottom: 16px; /* Reduce from 20px */
+  }
+  
+  .countdown-number {
+    font-size: 42px; /* Reduce from 48px */
+  }
+  
+  .countdown-label {
+    font-size: 11px; /* Reduce from 12px */
+  }
+  
+  /* Adjust section spacing for medium screens */
+  .section-title {
+    font-size: 38px !important; /* Reduce from 42px */
+  }
+  
+  /* Adjust container padding for medium screens */
+  .container {
+    padding: 0 20px; /* Reduce from 24px */
+  }
+  
+  /* LAPTOP SECTION OPTIMIZATION - Make sections fit in viewport */
+  .membership-section,
+  .campaign-progress-section,
+  .impact-direct-section,
+  .donor-benefits-section,
+  .testimonials-section {
+    padding-top: 32px; /* Reduced for better spacing */
+    padding-bottom: 32px; /* Reduced for better spacing */
+    min-height: auto; /* Remove fixed height constraint */
+  }
+  
+  /* Reduce header margins for better fit */
+  .section-header,
+  .progress-header,
+  .benefits-header,
+  .membership-header,
+  .testimonials-header {
+    margin-bottom: 32px; /* Reduce from 48px */
+  }
+  
+  /* Adjust grid gaps for better fit */
+  .tiers-grid {
+    gap: 24px; /* Reduce from 32px */
+  }
+  
+  .benefits-grid {
+    gap: 20px; /* Reduce grid gaps */
+  }
+  
+  /* Reduce card padding for better fit */
+  .tier-card {
+    padding: 24px; /* Reduce from 32px */
+  }
+  
+  .testimonial-card {
+    padding: 24px; /* Reduce from 32px */
+  }
 }
 
 /* Tier Cards Styling with Brand Guidelines */
@@ -835,7 +914,7 @@
 .benefit-category {
   background: white;
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: 16px;
   border: 1px solid #f5f5f5;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
@@ -1286,7 +1365,7 @@
 
 /* Modern Campaign Progress Section Styles */
 .campaign-progress-section {
-  padding: 5rem 0;
+  padding: 1.5rem 0;
   background-color: #f9fafb; /* Lighter grey background */
   border-top: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
@@ -1294,7 +1373,7 @@
 
 .progress-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
 
 .progress-header h2 {
@@ -1316,11 +1395,11 @@
 .progress-main-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 1.5rem;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
 }
 
 /* Left Column: Visuals */
@@ -1333,7 +1412,7 @@
 
 .progress-circle-container {
   position: relative;
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 .progress-ring {
@@ -1361,14 +1440,14 @@
 
 .progress-number {
   font-family: var(--font-accent);
-  font-size: 3.5rem;
+  font-size: clamp(1.8rem, 4.5vw, 2.5rem);
   font-weight: 800;
   color: #1f2937;
   line-height: 1;
 }
 
 .progress-percent {
-  font-size: 1.5rem;
+  font-size: clamp(0.8rem, 2.2vw, 1.1rem);
   font-weight: 600;
   color: var(--deep-rose);
   margin-left: 0.25rem;
@@ -1376,7 +1455,7 @@
 
 .progress-label {
   font-family: var(--font-primary);
-  font-size: 1rem;
+  font-size: clamp(0.65rem, 1.6vw, 0.8rem);
   font-weight: 500;
   color: #4b5563;
   text-transform: uppercase;
@@ -1385,15 +1464,16 @@
 
 .progress-summary-text h3 {
   font-family: var(--font-accent);
-  font-size: 1.5rem;
+  font-size: clamp(0.8rem, 2vw, 1rem);
   color: #1f2937;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .progress-summary-text p {
   color: #4b5563;
-  line-height: 1.6;
-  max-width: 350px;
+  line-height: 1.3;
+  max-width: 240px;
+  font-size: 0.85rem;
 }
 
 /* Right Column: Stats */
@@ -1405,17 +1485,17 @@
 .progress-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+  gap: 0.75rem;
 }
 
 .stat-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   transition: all 0.3s ease;
 }
 
@@ -1448,27 +1528,39 @@
 
 .stat-number {
   font-family: var(--font-accent);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #111827;
   line-height: 1.2;
 }
 
 .stat-label {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #6b7280;
 }
 
-/* Zeffy Thermometer */
-.thermometer-wrapper {
-  margin-top: 4rem;
-  padding-top: 2rem;
+
+
+/* Progress Bar Integrated */
+.progress-bar-integrated {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0;
   border-top: 1px solid #e5e7eb;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.thermometer-container {
-  max-width: 800px;
-  margin: 0 auto;
+/* Fix donation progress bar overlay issue */
+.progress-bar-integrated {
+  position: relative;
+  z-index: 1; /* Keep below header */
+}
+
+.progress-bar-integrated iframe {
+  position: relative;
+  z-index: 1; /* Keep below header */
 }
 
 /* Responsive styles */
@@ -1527,10 +1619,10 @@
   height: 80px;
   background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(249, 250, 251, 0.5) 35%, rgba(249, 250, 251, 0.9) 100%);
   pointer-events: none;
+  border-radius: 16px;
 }
 
 .campaign-progress-section {
-  padding-top: 24px; /* reduce top padding to bring sections closer */
   background: linear-gradient(180deg, rgba(249,250,251,1) 0%, rgba(249,250,251,1) 100%);
 }
 
@@ -1552,6 +1644,487 @@
 #benefits {
   scroll-margin-top: 96px; /* matches header + safe breathing room */
 }
+
+/* Simple, effective sparkle animation for Popular tier cards */
+.sparkle-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.sparkle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: sparkle-burst 1s ease-out forwards;
+  animation-delay: var(--sparkle-delay);
+}
+
+.sparkle-dot {
+  width: var(--sparkle-size);
+  height: var(--sparkle-size);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+}
+
+.sparkle-star4 {
+  width: var(--sparkle-size);
+  height: var(--sparkle-size);
+  background: rgba(255, 255, 255, 0.7);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+.sparkle-star6 {
+  width: var(--sparkle-size);
+  height: var(--sparkle-size);
+  background: rgba(255, 255, 255, 0.6);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes sparkle-burst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(
+      calc(-50% + var(--sparkle-x)), 
+      calc(-50% + var(--sparkle-y))
+    ) scale(0.8);
+  }
+}
+
+.sparkle-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sparkle-glow.active {
+  opacity: 1;
+  animation: glow-pulse 1s ease-in-out;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Accessibility: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .sparkle {
+    animation: none;
+    opacity: 0;
+  }
+  
+  .sparkle-glow.active {
+    animation: none;
+    opacity: 0.3;
+  }
+  
+  .tier-card.popular:hover .sparkle-glow.active {
+    opacity: 0.5;
+  }
+}
+
+/* Ensure tier-card has relative positioning for sparkle container */
+.tier-card {
+  position: relative;
+  z-index: 1; /* Ensure proper layering within the wrapper */
+}
+
+/* New layout: Changemaker card + Your Direct Impact side by side */
+.tiers-impact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  align-items: start;
+  position: relative;
+}
+
+/* Changemaker card positioning */
+.tier-card-wrapper {
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  top: var(--sticky-top-offset, 112px);
+  height: fit-content;
+  z-index: 2; /* Below header (10), above background */
+  padding-top: 20px; /* Extra padding to prevent Top Impact badge interference */
+}
+
+.impact-sidebar {
+  background: white;
+  border: 1px solid #fecdd3;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1; /* Ensure proper layering */
+}
+
+.impact-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--deep-rose), var(--salmon-pink));
+}
+
+.impact-sidebar-content h3 {
+  font-family: var(--font-accent);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-rose);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.impact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.impact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #fef2f2;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.impact-item:hover {
+  background: #fee2e2;
+  transform: translateX(4px);
+}
+
+.impact-item .impact-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--deep-rose);
+  border: 2px solid #fecdd3;
+}
+
+.impact-item .impact-content h4 {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.impact-item .impact-content p {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.funding-summary {
+  background: #fef2f2;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid #fecdd3;
+}
+
+.funding-summary h4 {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--deep-rose);
+  margin-bottom: 0.5rem;
+}
+
+.funding-summary p {
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Member Benefits Section - Now positioned underneath */
+.member-benefits-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(255, 249, 247, 0.6), rgba(253, 242, 248, 0.6));
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-top: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #fecdd3;
+}
+
+.member-benefits-section .benefits-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.member-benefits-section .benefits-header h3 {
+  font-family: var(--font-accent);
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: var(--deep-rose);
+  margin-bottom: 0.5rem;
+  word-wrap: break-word;
+}
+
+.member-benefits-section .benefits-header p {
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  color: var(--charcoal);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  word-wrap: break-word;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+/* Responsive styles for the new layout */
+@media (max-width: 1024px) {
+  .tiers-impact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .impact-sidebar {
+    order: 2;
+  }
+  
+  .tier-card-wrapper {
+    order: 1;
+    position: static; /* Disable sticky on smaller screens for better mobile experience */
+    top: auto;
+    z-index: auto; /* Reset z-index on mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .tiers-impact-grid {
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  
+  .impact-sidebar {
+    padding: 1.25rem;
+  }
+  
+  .impact-sidebar-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .impact-items {
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .impact-item {
+    padding: 0.625rem;
+  }
+  
+  .impact-item .impact-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .impact-item .impact-content h4 {
+    font-size: 0.85rem;
+  }
+  
+  .impact-item .impact-content p {
+    font-size: 0.75rem;
+  }
+  
+  .funding-summary {
+    padding: 0.875rem;
+  }
+  
+  .funding-summary h4 {
+    font-size: 0.9rem;
+  }
+  
+  .funding-summary p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tiers-impact-grid {
+    gap: 1rem;
+    padding: 0.75rem 0;
+  }
+  
+  .impact-sidebar {
+    padding: 1rem;
+  }
+  
+  .impact-sidebar-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .impact-items {
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .impact-item {
+    padding: 0.5rem;
+  }
+  
+  .impact-item .impact-icon {
+    width: 2rem;
+    height: 2rem;
+    font-size: 0.75rem;
+  }
+  
+  .impact-item .impact-content h4 {
+    font-size: 0.8rem;
+  }
+  
+  .impact-item .impact-content p {
+    font-size: 0.7rem;
+  }
+  
+  .funding-summary {
+    padding: 0.75rem;
+  }
+  
+  .funding-summary h4 {
+    font-size: 0.85rem;
+  }
+  
+  .funding-summary p {
+    font-size: 0.75rem;
+  }
+}
+
+/* Impact Placeholder Styling */
+.impact-placeholder {
+  text-align: center;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, rgba(255, 249, 247, 0.6), rgba(253, 242, 248, 0.6));
+  border-radius: 1rem;
+  border: 1px solid #fecdd3;
+}
+
+.impact-placeholder h2 {
+  font-family: var(--font-accent);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 900;
+  color: var(--deep-rose);
+  margin-bottom: 1rem;
+}
+
+.impact-placeholder p {
+  font-size: 1.1rem;
+  color: var(--charcoal);
+  opacity: 0.8;
+}
+
+/* Hide navbar when Zeffy popup is active with smooth animation */
+body.zeffy-popup-active header,
+body.zeffy-popup-active .hamburger-menu {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+/* Ensure Zeffy close button appears above donation box */
+.zeffy-close-btn {
+  position: fixed !important;
+  top: 20px !important;
+  right: 20px !important;
+  z-index: 1000000 !important;
+  background: #fff !important;
+  border: 2px solid #c81e5d !important;
+  color: #c81e5d !important;
+  font-size: 24px !important;
+  font-weight: bold !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  transition: all 0.2s ease !important;
+}
+
+.zeffy-close-btn:hover {
+  background: #c81e5d !important;
+  color: #fff !important;
+  transform: scale(1.1) !important;
+}
+
+/* Ensure Zeffy overlays/modals render above all site UI */
+iframe[src*="zeffy.com"],
+iframe[title*="Donation"],
+iframe[title*="donation"],
+.zeffy-iframe,
+.zeffy-modal,
+.zeffy-popup,
+[data-zeffy],
+[class*="zeffy"],
+[id*="zeffy"] {
+  position: relative;
+  z-index: 999999 !important;
+}
+
+/* Ensure sticky works within the membership section */
+.membership-section {
+  overflow: visible;
+}
+
+
 
 
 

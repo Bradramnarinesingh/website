@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from 'react';
 
-export default function GlobalBackground(): JSX.Element {
+export default function GlobalBackground() {
   useEffect(() => {
     document.body.classList.add("has-global-bg");
     return () => { document.body.classList.remove("has-global-bg"); };
